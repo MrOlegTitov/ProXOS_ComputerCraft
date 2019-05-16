@@ -1,0 +1,81 @@
+term.setBackgroundColor(colors.blue)
+os.pullEvent = os.pullEventRaw
+
+local w,h = term.getSize()
+
+function printCentered( y,s )
+   local x = math.floor((w - string.len(s)) / 2)
+   term.setCursorPos(x,y)
+   term.clearLine()
+   term.write( s )
+end
+
+local nOption = 1
+
+local function drawMenu()
+   term.clear()
+   term.setCursorPos(1,1)
+   term.setTextColor(colors.lightGray)term.write("Select Boot Device")
+
+   term.setCursorPos(w-11,1)
+   if nOption == 1 then
+   term.setTextColor(colors.lightGray)term.write("Load CraftOS")
+elseif nOption == 2 then
+   term.setTextColor(colors.lightGray)term.write("Load ProXOS")
+elseif nOption == 3 then
+   term.setTextColor(colors.lightGray)term.write("Advanced menu")
+else
+end
+
+end
+--GUI
+term.clear()
+local function drawFrontend()
+   term.setTextColor(colors.lightGray)
+   printCentered( math.floor(h/2) - 4, "")
+   printCentered( math.floor(h/2) - 3, "Boot Menu")
+   printCentered( math.floor(h/2) - 2, "Select boot device")
+   printCentered( math.floor(h/2) - 1, "")
+   printCentered( math.floor(h/2) + 0, ((nOption == 1) and "[ CraftOS ]") or "CraftOS" )
+   printCentered( math.floor(h/2) + 1, ((nOption == 2) and "[ ProXOS ]") or "ProXOS" )
+   printCentered( math.floor(h/2) + 2, ((nOption == 3) and "[ Advanced menu ]") or "Advanced menu")
+end
+
+--Display
+drawMenu()
+drawFrontend()
+
+while true do
+ local e,p = os.pullEvent()
+ if e == "key" then
+  local key = p
+  if key == 17 or key == 200 then
+
+   if nOption > 1 then
+    nOption = nOption - 1
+    drawMenu()
+    drawFrontend()
+   end
+  elseif key == 31 or key == 208 then
+  if nOption < 3 then
+  nOption = nOption + 1
+  drawMenu()
+  drawFrontend()
+end
+elseif key == 28 then
+break
+end
+end
+end
+term.clear()
+
+--Conditions
+term.setBackgroundColor(colors.black)
+if nOption  == 1 then
+shell.run("proxos/command.lua")
+elseif nOption == 2 then
+sleep(1)
+shell.run("proxos/gui.lua")
+else
+shell.run("proxos/advBootMenu")
+end

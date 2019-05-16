@@ -1,0 +1,22 @@
+term.clear()
+local w,h = term.getSize()
+term.setBackgroundColor(colors.brown)
+term.setCursorPos((w/2),1)
+term.setTextColor(colors.white)
+term.write("Pro Studio 'XEdit'")
+term.setCursorPos(1,2)
+print("Enter File name")
+print("Example: myScript.lua")
+while true do
+local newFileName = read()
+sleep(0.5)
+if newFileName == "" then
+print("error")
+sleep(1)
+shell.run("/proxos/.programs/IDE.lua")
+break
+else
+shell.run("edit /proxos/.custom/",newFileName)
+break
+end
+end

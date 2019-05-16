@@ -1,0 +1,7 @@
+term.setBackgroundColor(colors.black)
+term.clear()
+term.setCursorPos(1,1)
+term.setTextColor(colors.green)
+print("Welcome to modified Craft OS shell")
+print("To go to boot menu type 'BootMenu'")
+print("--------------------------------------")

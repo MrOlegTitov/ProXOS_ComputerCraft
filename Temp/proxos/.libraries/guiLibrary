@@ -1,0 +1,11 @@
+-- Library for gui.lua
+--Disign:
+  bgPath = ""
+  while true do
+    if bgPath == "" then
+      bgPath = "/proxos/.backgrounds/dt"
+      break
+    else
+      break
+    end
+  end
