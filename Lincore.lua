@@ -1,0 +1,1 @@
+print("Lincore Rulit!!!")
