@@ -1,2 +1,0 @@
-print("uhdieud")
-print("owhufdif")
